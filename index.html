@@ -333,7 +333,22 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
 <!-- 4 · 真实界面对比 -->
 <section class="wrap">
   <h2>4 · 放回真实 feed 里比</h2>
-  <p class="sec-sub">同一段真实内容：session 卡 → 用户提问 → Chatbot 文字回答 → 语音实时反馈卡 → Peak Moment → Run1 Report。三列分别是现状、本期建议、以后的完全体。</p>
+  <p class="sec-sub">
+    同一段真实内容：session 卡 → 用户提问 → Chatbot 文字回答 → 语音实时反馈卡 → Peak Moment → Run1 Report。三列分别是现状、本期建议、以后的完全体。
+  </p>
+  <div class="card" style="margin-bottom:22px;background:#FFFDF2;outline:2px solid #FFD87A;outline-offset:-2px">
+    <span class="pill" style="background:#FFF0C7;color:#8A5A00">还没定的一件事</span>
+    <h3>语音卡到底留不留那个圆？</h3>
+    <p style="margin-bottom:12px">
+      v1 我推荐的 A 是<b>把圆整个去掉</b>，换成左边一条薄荷竖条。v3 我改成<b>保留圆、换成薄荷耳机图标</b>——
+      因为看到真实 feed 之后发现，去掉圆之后语音卡是这一屏里<b>唯一一张没有类型图标的卡</b>。
+      两版都带「Coach」标签，差别只有这一个圆。下面这个开关可以直接切，看哪个在真实 feed 里更顺眼。
+    </p>
+    <div class="ctrls" id="vstyle-ctrls" style="margin-bottom:0">
+      <button data-v="icon" aria-pressed="true">薄荷圆 + 耳机（v3 建议）</button>
+      <button data-v="strip" aria-pressed="false">去掉圆 + 薄荷竖条（v1 的 A）</button>
+    </div>
+  </div>
   <div class="phones" id="phones"></div>
 </section>
 
@@ -559,27 +574,43 @@ function feed(cfg){
   </div>`;
 }
 
-const COLS = [
+let vstyle = 'icon';
+const strip = () => vstyle === 'strip';
+
+const cols = () => [
   { cfg:{speaker:'none', voiceIcon:'voiceOld', voiceWho:false, strip:false, iqLabel:'Heygo IQ'},
     pill:'现状', tag:'p-red', name:'0｜今天的样子',
     d:'语音卡是灰色声波，和另外 5 个彩色类型图标不成族；文字回答完全没有说话人；同一个 115 一会儿叫 Heygo IQ 一会儿叫 BEST SEG。' },
-  { cfg:{speaker:'name', voiceIcon:'voiceNew', voiceWho:true, strip:false, iqLabel:'BEST SEG'},
-    pill:'本期建议', tag:'p-mint', name:'1｜圆位归族 + 对话有主语',
-    d:'语音卡换成薄荷底耳机 glyph，进入类型图标家族；文字回答加「Coach」标签；BEST SEG 统一。不引入任何新形象，不欠设计债。' },
-  { cfg:{speaker:'character', voiceIcon:'voiceNew', voiceWho:true, strip:false, iqLabel:'BEST SEG'},
+  { cfg:{speaker:'name', voiceIcon:strip()?null:'voiceNew', voiceWho:true, strip:strip(), iqLabel:'BEST SEG'},
+    pill:'本期建议', tag:'p-mint', name:'1｜'+(strip()?'去圆 + 竖条':'圆位归族')+' + 对话有主语',
+    d: strip()
+      ? '语音卡去掉圆，改成薄荷竖条 + 「Coach」标签。更克制，但它成了这一屏唯一没有左侧图标的卡——往下滚的时候会看出来不齐。'
+      : '语音卡换成薄荷底耳机 glyph，进入类型图标家族；文字回答加「Coach」标签；BEST SEG 统一。不引入任何新形象，不欠设计债。' },
+  { cfg:{speaker:'character', voiceIcon:strip()?null:'voiceNew', voiceWho:true, strip:strip(), iqLabel:'BEST SEG'},
     pill:'虚拟形象定稿后', tag:'p-blue', name:'2｜对话层换上 Ullr',
     d:'类型图标一动不动，只在文字回答左边多了 28px 的它。这时候「在和一个人说话」才成立，而且和卡片体系互不干扰。' }
 ];
 
-document.getElementById('phones').innerHTML = COLS.map(c=>`
-  <div class="pcol">
-    <div class="phone"><div class="screen">
-      <div class="sbar"><span>9:41</span><span class="dots"><i style="height:5px"></i><i style="height:7px"></i><i style="height:9px"></i><i style="height:11px"></i></span></div>
-      <div class="body">${feed(c.cfg)}</div>
-    </div></div>
-    <div class="plabel"><span class="pill ${c.tag}">${c.pill}</span>
-      <div class="n">${c.name}</div><div class="d">${c.d}</div></div>
-  </div>`).join('');
+function renderPhones(){
+  document.getElementById('phones').innerHTML = cols().map(c=>`
+    <div class="pcol">
+      <div class="phone"><div class="screen">
+        <div class="sbar"><span>9:41</span><span class="dots"><i style="height:5px"></i><i style="height:7px"></i><i style="height:9px"></i><i style="height:11px"></i></span></div>
+        <div class="body">${feed(c.cfg)}</div>
+      </div></div>
+      <div class="plabel"><span class="pill ${c.tag}">${c.pill}</span>
+        <div class="n">${c.name}</div><div class="d">${c.d}</div></div>
+    </div>`).join('');
+}
+renderPhones();
+
+document.querySelectorAll('#vstyle-ctrls button').forEach(b=>{
+  b.onclick = () => {
+    vstyle = b.dataset.v;
+    document.querySelectorAll('#vstyle-ctrls button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+    renderPhones();
+  };
+});
 
 /* ---------- stage ---------- */
 document.getElementById('mascot-host').innerHTML = mascotSVG(226,'big');
