@@ -115,6 +115,18 @@ h2{font-size:29px;letter-spacing:-.5px;margin:0 0 8px;font-weight:850}
 .ctrls button:hover{border-color:var(--g300)}
 .ctrls button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
 
+/* mode rows */
+.mrow{display:flex;align-items:center;gap:11px;background:#fff;border-radius:11px;padding:11px 13px;margin:5px}
+.mrow.sel{outline:2px solid var(--mint);outline-offset:-2px}
+.mrow>div{flex:1}
+.mrow b{display:block;font-size:14px;font-weight:800}
+.mrow i{display:block;font-style:normal;font-size:12px;color:var(--g2);margin-top:2px;line-height:1.4}
+.mrow .mi{flex:0 0 auto;width:24px;height:24px;display:grid;place-items:center}
+.mrow .ck{color:var(--mint-d);font-weight:900}
+.chip{display:inline-flex;align-items:center;gap:5px;background:#fff;border-radius:999px;padding:6px 12px 6px 9px;
+  font-size:12.5px;font-weight:800;box-shadow:0 1px 3px rgba(15,23,42,.1)}
+.chip .cv{color:var(--g300);font-size:10px}
+
 /* glyph options */
 .glyphs{display:flex;gap:16px;flex-wrap:wrap}
 .gopt{background:#fff;border-radius:16px;padding:16px;text-align:center;flex:1;min-width:150px;box-shadow:0 1px 3px rgba(15,23,42,.06)}
@@ -172,14 +184,15 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
 <body>
 
 <header class="wrap">
-  <div class="kicker">Heygo · Chatbot Avatar · 设计方案 v2（按真实截图修订）</div>
-  <h1>我们在争的那个圆<em>根本不是头像位</em>，<br>它是卡片类型位。</h1>
+  <div class="kicker">Heygo · Chatbot Avatar · 设计方案 v3（按真实截图修订）</div>
+  <h1>那个人头剪影<em>该整个删掉</em>。<br>它在 5 个地方出现，一次信息都没给。</h1>
   <p class="lede">
-    看过真实的 Chatbot 长图之后，我改了上一版的判断。那个灰色声波圆和 Peak Moment 的橙色滑手、Fall Detected 的红色摔倒、
-    CRUSHED IT! 的金色闪电、Day Report 的蓝色日历、Run Report 的绿色文档，<b>长在同一个槽位上</b>。
-    所以用户读它是「第 6 种卡片类型」，不是「谁在说话」——难怪它没有活人感，它压根不在人的位置上。
+    它现在同时干三份工：语音反馈卡的<b>类型图标</b>、顶部的<b>教练模式指示</b>、Select Mode 里<b>三个模式的列表图标</b>。
+    三份工的语义完全不同，却用同一个剪影，所以在每一处都不成立——在卡片里它和 5 个彩色类型图标不成族，
+    在模式列表里三个长得一模一样（Edward 已经圈出来了），在顶部它又被误读成头像。
+    <b>正确做法是按岗位拆成三套符号，剪影本身退休。</b>
   </p>
-  <p class="meta">v2 · 依据 Chatbot 全屏截图修订 · 配色取自 app_flutter 的 AppPalette</p>
+  <p class="meta">v3 · 依据 Chatbot 全屏截图 + Select Mode 设计稿修订 · 配色取自 app_flutter 的 AppPalette</p>
 </header>
 
 <!-- 1 · 证据 -->
@@ -271,16 +284,62 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
   </div>
 </section>
 
-<!-- 3 · 真实界面对比 -->
+<!-- 2.5 · 模式图标 -->
 <section class="wrap">
-  <h2>3 · 放回真实 feed 里比</h2>
+  <h2>3 · 第三个岗位：教练模式的三个图标</h2>
+  <p class="sec-sub">
+    Edward 圈的没错——<b>这三个图标现在确实一样</b>。但结论不是「删掉」，而是「它们本来就该长得不一样」。
+    这三个模式的差别是<b>教练说多少话</b>，这是个音量概念，用音量三态最直白，20px 下不用数、不用学。
+  </p>
+  <div class="grid2" style="grid-template-columns:1fr 1fr;align-items:start">
+    <div class="card">
+      <span class="pill p-red">现状</span>
+      <h3>同一个剪影，靠数波浪线区分</h3>
+      <p>深度 / 随行 / 静音三个图标共用一个人头剪影，差别只有右上角一两根小波纹和一个 x。20px 下这点差别等于没有。</p>
+      <div style="margin-top:16px;background:var(--slate);border-radius:14px;padding:6px">
+        <div class="mrow"><span class="mi" id="old1"></span><div><b>Intensive Coach</b><i>Continuous presence with proactive check-ins.</i></div></div>
+        <div class="mrow"><span class="mi" id="old2"></span><div><b>Standard Coach</b><i>Continuous monitoring with targeted guidance.</i></div></div>
+        <div class="mrow"><span class="mi" id="old3"></span><div><b>Mute</b><i>Silent background logging, zero interruptions.</i></div></div>
+      </div>
+      <p class="quote">而且这个剪影就是被当成头像误读的那个东西。它在这里表状态，在卡片里表类型，在顶部表模式——一个符号扛不动三种语义。</p>
+    </div>
+    <div class="card" style="outline:2.5px solid var(--mint);outline-offset:-2.5px">
+      <span class="pill p-mint">建议 · 音量三态</span>
+      <h3>形状 + 颜色双重区分，不靠数数</h3>
+      <p>沿用 iOS 音量图标的通用语义：说得多 = 两道声弧，说得少 = 一道，静音 = 划掉并转灰。灰色在这里第一次有了意义——它<b>真的</b>是关掉的。</p>
+      <div style="margin-top:16px;background:var(--slate);border-radius:14px;padding:6px">
+        <div class="mrow sel"><span class="mi" id="new1"></span><div><b>Intensive Coach</b><i>全程在耳边，主动 check-in</i></div><span class="ck">✓</span></div>
+        <div class="mrow"><span class="mi" id="new2"></span><div><b>Standard Coach</b><i>只在关键问题时开口</i></div></div>
+        <div class="mrow"><span class="mi" id="new3"></span><div><b>Mute</b><i>完全不说话，只记录</i></div></div>
+      </div>
+      <p style="margin-top:16px"><b>顶部指示器同一套符号，20px 实际尺寸：</b></p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px" id="chips"></div>
+      <p class="quote">列表是用户<b>学会</b>这套符号的地方，顶部是他<b>用</b>它的地方。所以列表里的图标不该删——删了顶部那个就没人认识了。</p>
+    </div>
+  </div>
+  <div class="grid3" style="margin-top:18px">
+    <div class="card"><span class="pill p-blue">为什么顶部要留</span>
+      <h3>Mute 是需要被一眼看见的状态</h3>
+      <p>用户滑到一半发现教练一直不说话，第一反应是「坏了」而不是「我开了静音」。顶部一个划掉的灰图标，比读「Mute」两个字快得多。</p></div>
+    <div class="card"><span class="pill p-grey">顺手</span>
+      <h3>中英文名字对不上</h3>
+      <p>EN 是 Intensive / Standard / Mute，CN 是深度教练 / 随行教练 / 静音。「Standard」和「随行」不是一个意思，建议 EN 改成 <b>Companion Coach</b> 或 CN 改成<b>标准教练</b>，二选一。</p></div>
+    <div class="card"><span class="pill p-red">品牌规范</span>
+      <h3>输入框写成了 HeyGo</h3>
+      <p>占位符是「Ask HeyGo Coach…」，但品牌规范是 <b>Heygo</b>（中间 g 小写）。同一屏里 Heygo IQ 是对的，这里不一致，一起改掉。</p></div>
+  </div>
+</section>
+
+<!-- 4 · 真实界面对比 -->
+<section class="wrap">
+  <h2>4 · 放回真实 feed 里比</h2>
   <p class="sec-sub">同一段真实内容：session 卡 → 用户提问 → Chatbot 文字回答 → 语音实时反馈卡 → Peak Moment → Run1 Report。三列分别是现状、本期建议、以后的完全体。</p>
   <div class="phones" id="phones"></div>
 </section>
 
 <!-- 4 · 角色 -->
 <section class="wrap">
-  <h2>4 · 如果要做角色，它长这样：Ullr</h2>
+  <h2>5 · 如果要做角色，它长这样：Ullr</h2>
   <p class="sec-sub">Ullr 是北欧神话里的滑雪之神，也是我们仓库里已经在用的名字。品牌薄荷 <code>#28F5D2</code> + 柠檬 <code>#B1FE2B</code>，不用人脸、不用写实，避免和用户自己的头像混淆。点按钮看状态。</p>
   <div class="ctrls" id="state-ctrls">
     <button data-state="idle" aria-pressed="true">待机</button>
@@ -313,27 +372,31 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
 
 <!-- 5 · 落地 -->
 <section class="wrap">
-  <h2>5 · 落地：本期 4 件事，以后 1 件事</h2>
-  <p class="sec-sub">关键是把两个槽位在组件层分开：<code>cardType</code> 管卡片图标，<code>speaker</code> 管说话人。分开之后，加不加头像就再也不用重开这个会。</p>
+  <h2>6 · 落地：本期 6 件事，以后 1 件事</h2>
+  <p class="sec-sub">关键是把三个槽位在组件层分开：<code>cardType</code> 管卡片类型，<code>coachMode</code> 管教练音量，<code>speaker</code> 管说话人。分开之后，加不加头像就再也不用重开这个会。</p>
   <div class="grid2">
-    <pre class="code"><span class="c">// 两个槽位，语义完全不同</span>
+    <pre class="code"><span class="c">// 三个槽位，语义完全不同，谁也别借谁的图标</span>
 <span class="k">enum</span> CardType   { peak, fall, crushed, day, run, <span class="s">voice</span> }
+<span class="k">enum</span> CoachMode  { intensive, standard, <span class="s">mute</span> }
 <span class="k">enum</span> SpeakerTag { none, <span class="s">name</span>, mark, character }
 
 CoachCard(
-  cardType: CardType.<span class="s">voice</span>,     <span class="c">// 薄荷底 + 耳机 glyph</span>
+  cardType: CardType.<span class="s">voice</span>,     <span class="c">// 薄荷底 + 耳机（类型）</span>
   speaker : SpeakerTag.<span class="s">name</span>,      <span class="c">// 本期：只显示「Coach」</span>
 )
+ModeChip(mode: CoachMode.<span class="s">mute</span>)   <span class="c">// 音量三态（状态）</span>
 
 <span class="c">// 虚拟形象定稿后，只改这一行：</span>
 <span class="c">// speaker: SpeakerTag.character</span></pre>
     <div class="card">
       <span class="pill p-mint">本期清单</span>
-      <h3>四件事</h3>
-      <p><b>1.</b> 语音卡圆位换成<b>薄荷底 + 白色耳机 glyph</b>，和另外 5 个类型图标同族。灰色版废弃。</p>
-      <p><b>2.</b> Chatbot 的纯文本回答上加一行说话人标签「<b>Coach</b>」，让对话有主语。</p>
-      <p><b>3.</b> 组件拆出 <code>cardType</code> / <code>speaker</code> 两个槽位，<code>speaker</code> 预留 28/48 两个尺寸。</p>
-      <p><b>4.</b> 把 Heygo IQ / BEST SEG <b>统一成 BEST SEG</b>，三张卡一起改（Figma 交接单第 1 条）。</p>
+      <h3>六件事</h3>
+      <p><b>1.</b> 语音卡圆位换成<b>薄荷底 + 白色耳机 glyph</b>，和另外 5 个类型图标同族。人头剪影废弃。</p>
+      <p><b>2.</b> 三个教练模式换成<b>音量三态</b>（两道弧 / 一道弧 / 划掉转灰），列表和顶部用同一套。</p>
+      <p><b>3.</b> Chatbot 的纯文本回答上加一行说话人标签「<b>Coach</b>」，让对话有主语。</p>
+      <p><b>4.</b> 组件拆出 <code>cardType</code> / <code>coachMode</code> / <code>speaker</code> 三个槽位。</p>
+      <p><b>5.</b> Heygo IQ / BEST SEG <b>统一成 BEST SEG</b>，三张卡一起改（Figma 交接单第 1 条）。</p>
+      <p><b>6.</b> 输入框占位符 <code>Ask HeyGo Coach…</code> → <code>Ask Heygo Coach…</code>；顺便定一下 Standard / 随行 用哪个说法。</p>
       <p class="quote">以后一件事：虚拟形象定稿 → 设计交 <b>28/48/96 三个尺寸 × 5 个状态</b> → 前端改一个枚举值。</p>
     </div>
   </div>
@@ -407,6 +470,35 @@ const SPEAKER = {
     <path d="M18 48c9 0 9-11 18-11s9-11 18-11" stroke="#06403A" stroke-width="6" fill="none" stroke-linecap="round" opacity=".8"/></svg>`,
   character: (s=28) => `<span class="state-idle" style="flex:0 0 auto;display:block;width:${s}px;height:${s}px">${mascotSVG(s,'')}</span>`
 };
+
+/* ---------- coach mode icons ---------- */
+const oldGlyph = (waves, x, s=22) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"
+  stroke="#557288" stroke-width="1.7" stroke-linecap="round">
+  <path d="M11 4C7.1 4 4 7.1 4 11s3.1 7 7 7c1 0 1.8-.8 1.8-1.8V5.8C12.8 4.8 12 4 11 4z" fill="#557288" stroke="none"/>
+  ${waves>0?'<path d="M15.8 9c1.1 1.3 1.1 4.7 0 6"/>':''}
+  ${waves>1?'<path d="M18.6 7c1.9 2.2 1.9 8 0 10"/>':''}
+  ${x?'<path d="M16 9.5l4.5 4.5M20.5 9.5L16 14"/>':''}
+</svg>`;
+
+const volGlyph = (arcs, mute, s=22) => {
+  const c = mute ? '#90A1B9' : '#0B9E86';
+  return `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 9.5h3.2L11 6v12l-3.8-3.5H4z" fill="${c}"/>
+    ${arcs>0?`<path d="M14.2 10a3.7 3.7 0 0 1 0 4"/>`:''}
+    ${arcs>1?`<path d="M17 7.4a7.7 7.7 0 0 1 0 9.2"/>`:''}
+    ${mute?`<path d="M15 9.6l5 4.8M20 9.6l-5 4.8"/>`:''}
+  </svg>`;
+};
+
+[['old1',oldGlyph(2,false)],['old2',oldGlyph(1,false)],['old3',oldGlyph(0,true)],
+ ['new1',volGlyph(2,false)],['new2',volGlyph(1,false)],['new3',volGlyph(0,true)]]
+ .forEach(([id,svg])=>{ const el=document.getElementById(id); if(el) el.innerHTML=svg; });
+
+document.getElementById('chips').innerHTML = [
+  [volGlyph(2,false,17),'Intensive Coach'],
+  [volGlyph(1,false,17),'Standard Coach'],
+  [volGlyph(0,true,17), 'Mute']
+].map(([g,n])=>`<span class="chip">${g}${n}<span class="cv">⌄</span></span>`).join('');
 
 /* ---------- feed ---------- */
 const clock = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" style="opacity:.6"><circle cx="12" cy="12" r="9" stroke="#90A1B9" stroke-width="2.6"/><path d="M12 7v5l3 2" stroke="#90A1B9" stroke-width="2.6" stroke-linecap="round"/></svg>`;
