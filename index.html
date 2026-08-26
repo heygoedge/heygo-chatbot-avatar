@@ -308,9 +308,9 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
       <h3>形状 + 颜色双重区分，不靠数数</h3>
       <p>沿用 iOS 音量图标的通用语义：说得多 = 两道声弧，说得少 = 一道，静音 = 划掉并转灰。灰色在这里第一次有了意义——它<b>真的</b>是关掉的。</p>
       <div style="margin-top:16px;background:var(--slate);border-radius:14px;padding:6px">
-        <div class="mrow sel"><span class="mi" id="new1"></span><div><b>详细　Detailed</b><i>每个问题都说，并告诉你怎么改</i></div><span class="ck">✓</span></div>
-        <div class="mrow"><span class="mi" id="new2"></span><div><b>简洁　Brief</b><i>只说关键问题，一句话说清</i></div></div>
-        <div class="mrow"><span class="mi" id="new3"></span><div><b>静音　Silent</b><i>全程不出声，练完自己看</i></div></div>
+        <div class="mrow sel"><span class="mi" id="new1"></span><div><b>详细　Detailed</b><i>一趟最多说 4 次，每次给一个动作</i></div><span class="ck">✓</span></div>
+        <div class="mrow"><span class="mi" id="new2"></span><div><b>简洁　Brief</b><i>一趟最多说 1 次，只挑最要紧的</i></div></div>
+        <div class="mrow"><span class="mi" id="new3"></span><div><b>静音　Silent</b><i>一趟一次都不说，练完再看</i></div></div>
       </div>
       <p style="margin-top:16px"><b>顶部指示器同一套符号，20px 实际尺寸：</b></p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px" id="chips"></div>
@@ -335,61 +335,61 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
 <section class="wrap">
   <h2>4 · 三个模式的名字和描述文案</h2>
   <p class="sec-sub">
-    Edward 之前说「文案都去掉，做简单一点」，现在的问题是：<b>【静音】不用解释，【简洁】【详细】不解释看不懂</b>；
-    只给两个加描述，UI 又不齐。解法是三行都给，但每行压到 <b>11–13 个字</b>——不是段落，是一行标签。
+    Edward 的第二轮反馈是对的：写「每个问题都说 / 只说关键问题」，用户读完只会更疑惑——<b>什么是关键问题？我滑一趟到底会听到多少？</b>
+    所以描述不能讲「说什么」，要讲<b>「一趟能听到几次」</b>。下面的数字是从
+    <code>nudge_day_state.dart</code> 的实际配额表来的，不是拍的。
   </p>
 
   <div class="grid2" style="align-items:start">
     <div class="card">
-      <span class="pill p-red">先修一个命名 bug</span>
-      <h3>「简单 / 频繁」混了两个维度</h3>
-      <p><b>简单</b>说的是「说得少」，<b>频繁</b>说的是「说得勤」——一个讲量，一个讲频率，并排放用户没法比较。三个选项必须在<b>同一根轴</b>上。</p>
-      <p>这根轴就是<b>教练说多少话</b>。Edward 自己提的那组正好在同一根轴上，直接用：</p>
-      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
-        <span class="spec" style="flex:1"><b>详细</b>说得最多</span>
-        <span class="spec" style="flex:1"><b>简洁</b>说得少</span>
-        <span class="spec" style="flex:1"><b>静音</b>不说</span>
-      </div>
-      <p class="quote">Susan 定义里的「深度教练 / 关键提醒 / 勿扰记录」信息是对的，但名字太长——顶部指示器是个小 chip，装不下 6 个字。两个字最合适。</p>
+      <span class="pill p-blue">代码里查到的事实</span>
+      <h3>现在一趟最多说 4 次</h3>
+      <p>端侧每滑 <b>12 个弯</b>结算一批，<b>每批最多出声 1 次</b>。一趟的上限是：问题提醒 ≤2、进步 ≤1、没进步 ≤1，<b>合计最多 4 次</b>。同一个毛病一天最多说 3 次。</p>
+      <p>每次就<b>一句话、一个动作</b>，1.2–2 秒。已录好的原话长这样：「前脚膝盖先弯曲折叠」「脚踝别松，锁住」。所以「详细」根本不是话痨，用户完全可以接受。</p>
+      <p>另外不满 12 个弯的余弯会丢掉，所以<b>短趟可能一句都没有</b>——文案必须写「最多」，不能写「每趟都会」。</p>
+      <p class="quote">出处：<code>coach_nudge/domain/nudge_day_state.dart</code> 的配额表 + <code>doc-sp-on-device-coach-nudge-copy.md</code>。三档模式目前<b>还没实现</b>，只有一份待评审 PRD，所以 4 / 1 / 0 这三个数是可以现在定的。</p>
     </div>
 
     <div class="card" style="outline:2.5px solid var(--mint);outline-offset:-2.5px">
       <span class="pill p-mint">建议文案</span>
-      <h3>三行等长，静音那行也有信息</h3>
+      <h3>三行都回答「一趟听到几次」</h3>
       <table style="width:100%;border-collapse:collapse;margin-top:12px;font-size:14.5px">
         <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left">
           <th style="padding:6px 8px">模式</th><th style="padding:6px 8px">中文描述</th></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">详细</td>
-            <td style="padding:8px;color:var(--g1)">每个问题都说，并告诉你怎么改</td></tr>
+            <td style="padding:8px;color:var(--g1)">一趟最多说 4 次，每次给一个动作</td></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">简洁</td>
-            <td style="padding:8px;color:var(--g1)">只说关键问题，一句话说清</td></tr>
+            <td style="padding:8px;color:var(--g1)">一趟最多说 1 次，只挑最要紧的</td></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">静音</td>
-            <td style="padding:8px;color:var(--g1)">全程不出声，练完自己看</td></tr>
+            <td style="padding:8px;color:var(--g1)">一趟一次都不说，练完再看</td></tr>
       </table>
       <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:14px;border-top:1px solid var(--g200)">
         <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left">
           <th style="padding:8px 8px 6px">EN</th><th style="padding:8px 8px 6px">English copy</th></tr>
         <tr><td style="padding:7px 8px;font-weight:850">Detailed</td>
-            <td style="padding:7px 8px;color:var(--g1)">Calls out every issue and how to fix it</td></tr>
+            <td style="padding:7px 8px;color:var(--g1)">Up to 4 tips a run, one move each</td></tr>
         <tr><td style="padding:7px 8px;font-weight:850">Brief</td>
-            <td style="padding:7px 8px;color:var(--g1)">Key issues only, one line each</td></tr>
+            <td style="padding:7px 8px;color:var(--g1)">One tip a run, the one that matters most</td></tr>
         <tr><td style="padding:7px 8px;font-weight:850">Silent</td>
-            <td style="padding:7px 8px;color:var(--g1)">Never speaks — review it after your run</td></tr>
+            <td style="padding:7px 8px;color:var(--g1)">Nothing during the run — review it after</td></tr>
       </table>
       <p class="quote" style="margin-top:16px">
-        <b>静音那行不是为了凑格式。</b>它回答的是用户真正会问的那个问题——「静音了还记不记录？」。
-        所以三行都有信息，UI 也齐了，两个问题一起解决。
+        <b>4 / 1 / 0 是同一根轴上的三个刻度</b>，用户扫一眼就知道差别有多大，不用理解「关键」是什么意思。
+        「详细」那档就是<b>现在已有的行为</b>，所以只要实现「简洁」（砍到 1 次）和「静音」（砍到 0 次）两档。
+        静音那行顺带回答了「静音了还记不记录」——所以它不是为了凑格式，UI 也齐了。
       </p>
     </div>
   </div>
 
   <div class="grid3" style="margin-top:18px">
     <div class="card"><span class="pill p-blue">写法规则</span>
-      <h3>三行必须同结构</h3>
-      <p>都是「<b>说什么</b>，<b>怎么说 / 什么时候看</b>」两段式，逗号分隔，11–13 字。用户扫一眼就能横向比，不用逐条读完。</p></div>
-    <div class="card"><span class="pill p-grey">别写的东西</span>
-      <h3>不要写「全程」「巴拉巴拉」</h3>
-      <p>三个模式都是全程生效，「全程」是共有属性，写了等于没写（静音那行留着是因为要和「不出声」连读）。也不要写实现细节，用户只关心耳朵里听到什么。</p></div>
+      <h3>只写数量，不写「问题」</h3>
+      <p>用户选模式时想知道的是「会不会烦我」，不是「它分析什么」。所以三行都是「<b>一趟说几次，每次是什么</b>」，同结构、12–14 字。</p>
+      <p>「关键问题」「深度跟踪」这类词全部不要——用户没有判断标准，读完只会更疑惑。</p></div>
+    <div class="card"><span class="pill p-red">待产品拍板</span>
+      <h3>静音时摔倒关怀还出不出声？</h3>
+      <p>现在有两条 P0 语音：<b>摔倒关怀</b>和<b>低电量提醒</b>。待评审 PRD 写的「勿扰 = 零语音」会把这两条也关掉。</p>
+      <p>建议保留：摔了没人问一句不合适，电量不提醒设备直接用不了。如果保留，静音的描述可以补半句「摔倒和低电量除外」。</p></div>
     <div class="card"><span class="pill p-lime">顺带</span>
       <h3>顶部 chip 只放名字</h3>
       <p>描述只在 Select Mode 列表里出现。顶部指示器就两个字 + 音量图标，别把描述也带上去。</p></div>
