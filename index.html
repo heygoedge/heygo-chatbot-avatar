@@ -307,10 +307,11 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
       <span class="pill p-mint">建议 · 音量三态</span>
       <h3>形状 + 颜色双重区分，不靠数数</h3>
       <p>沿用 iOS 音量图标的通用语义：说得多 = 两道声弧，说得少 = 一道，静音 = 划掉并转灰。灰色在这里第一次有了意义——它<b>真的</b>是关掉的。</p>
-      <div style="margin-top:16px;background:var(--slate);border-radius:14px;padding:6px">
-        <div class="mrow sel"><span class="mi" id="new1"></span><div><b>详细　Detailed</b><i>大约每 10 个弯讲一句</i></div><span class="ck">✓</span></div>
-        <div class="mrow"><span class="mi" id="new2"></span><div><b>简洁　Brief</b><i>大约每 20 个弯讲一句</i></div></div>
-        <div class="mrow"><span class="mi" id="new3"></span><div><b>静音　Silent</b><i>滑行中不讲，练完再看</i></div></div>
+      <div class="ctrls" style="margin:14px 0 0"><button data-copy="intent" aria-pressed="true">B 意图版（建议）</button><button data-copy="number" aria-pressed="false">A 具象版（带数字）</button></div>
+      <div style="margin-top:12px;background:var(--slate);border-radius:14px;padding:6px">
+        <div class="mrow sel"><span class="mi" id="new1"></span><div><b>详细　Detailed</b><i id="d1">想被多提醒，边滑边改</i></div><span class="ck">✓</span></div>
+        <div class="mrow"><span class="mi" id="new2"></span><div><b>简洁　Brief</b><i id="d2">只想听重点，不打断节奏</i></div></div>
+        <div class="mrow"><span class="mi" id="new3"></span><div><b>静音　Silent</b><i id="d3">只想安静滑，练完再看</i></div></div>
       </div>
       <p style="margin-top:16px"><b>顶部指示器同一套符号，20px 实际尺寸：</b></p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px" id="chips"></div>
@@ -335,48 +336,48 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
 <section class="wrap">
   <h2>4 · 三个模式的名字和描述文案</h2>
   <p class="sec-sub">
-    已按 Edward 和双双对齐的方向定稿：<b>10 / 20 / 静音</b>。单位用「弯」不用「趟」——
-    室内一趟 3 分钟、室外一趟 30 分钟，用「趟」写同一个数字是两种完全不同的体验；用「弯」写，室内室外是同一个密度。
-    下面只做了两处打磨：把静音那行改成和前两行同一个句式，以及补上英文。
+    Leon 提的问题成立：<b>「每 10 个弯讲一句」太具象了，不该原样放进 UI</b>。
+    它是一个我们做不到的承诺——短趟攒不满一批、弯间隙超过 15 秒就断链重攒，用户数着弯等那一句，等不到就是 bug。
+    但 <b>10 / 20 这两个数不能丢</b>，它们是给算法的产品定义，该写在需求文档里，不是写在选项下面。
   </p>
 
   <div class="grid2" style="align-items:start">
     <div class="card">
-      <span class="pill p-lime">这版做了什么</span>
-      <h3>只改一处：静音那行的句式</h3>
-      <p>原话「<b>无实时语音教学。</b>」意思没问题，但它是名词短语 + 书面语，前两行是口语的动词句。三行并排时读起来断掉，而且「实时语音教学」是我们的内部词，用户不这么说话。</p>
-      <p>改成「<b>滑行中不讲，练完再看</b>」——和前两行同一个句式，同样 11 个字，而且顺带回答了用户真正会问的「那我静音了还有没有东西看」。</p>
-      <p>前两行原话已经很好，一个字没动，只把「说」统一成「讲」。</p>
+      <span class="pill p-blue">分两层写</span>
+      <h3>数字给算法，感受给用户</h3>
+      <p><b>需求文档里（给算法）：</b>详细 = 每 10 个弯 ≤1 句，简洁 = 每 20 个弯 ≤1 句，静音 = 0。精确、可实现、可测。端侧现在批大小是 12，建议改成 10，这样两档就是每 1 批 / 每 2 批。</p>
+      <p><b>UI 上（给用户）：</b>不出现任何数字。用户在雪场选模式时不会数弯，他要判断的只有一件事——<b>「这个会不会烦我」</b>。所以三行都写成「选它的理由」，第一人称视角。</p>
+      <p>这样写还有个好处：以后频率调参（10 改成 8 或 15），<b>文案一个字都不用动</b>。数字写进 UI 就等于把参数焊死了。</p>
       <p class="quote">出处：<code>coach_nudge/domain/nudge_day_state.dart</code>（配额表）、<code>skiing_session_controller_algorithm.dart:281</code>（趟边界）、<code>doc-sp-on-device-coach-nudge-v2.md</code>（延迟与丢弃）。</p>
     </div>
 
     <div class="card" style="outline:2.5px solid var(--mint);outline-offset:-2.5px">
       <span class="pill p-mint">建议文案</span>
-      <h3>定稿：10 / 20 / 静音</h3>
+      <h3>建议 UI 文案：意图版</h3>
       <table style="width:100%;border-collapse:collapse;margin-top:12px;font-size:14.5px">
         <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left">
           <th style="padding:6px 8px">模式</th><th style="padding:6px 8px">中文描述</th></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">详细</td>
-            <td style="padding:8px;color:var(--g1)">大约每 10 个弯讲一句</td></tr>
+            <td style="padding:8px;color:var(--g1)">想被多提醒，边滑边改</td></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">简洁</td>
-            <td style="padding:8px;color:var(--g1)">大约每 20 个弯讲一句</td></tr>
+            <td style="padding:8px;color:var(--g1)">只想听重点，不打断节奏</td></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">静音</td>
-            <td style="padding:8px;color:var(--g1)">滑行中不讲，练完再看</td></tr>
+            <td style="padding:8px;color:var(--g1)">只想安静滑，练完再看</td></tr>
       </table>
       <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:14px;border-top:1px solid var(--g200)">
         <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left">
           <th style="padding:8px 8px 6px">EN</th><th style="padding:8px 8px 6px">English copy</th></tr>
         <tr><td style="padding:7px 8px;font-weight:850">Detailed</td>
-            <td style="padding:7px 8px;color:var(--g1)">About one tip every 10 turns</td></tr>
+            <td style="padding:7px 8px;color:var(--g1)">Coach me the whole way down</td></tr>
         <tr><td style="padding:7px 8px;font-weight:850">Brief</td>
-            <td style="padding:7px 8px;color:var(--g1)">About one tip every 20 turns</td></tr>
+            <td style="padding:7px 8px;color:var(--g1)">Just the key moments</td></tr>
         <tr><td style="padding:7px 8px;font-weight:850">Silent</td>
-            <td style="padding:7px 8px;color:var(--g1)">No tips while you ride — review after</td></tr>
+            <td style="padding:7px 8px;color:var(--g1)">Ride quiet, review after</td></tr>
       </table>
       <p class="quote" style="margin-top:16px">
-        <b>10 / 20 正好能和算法对齐。</b>端侧现在是每 <b>12</b> 个弯结算一批、每批最多讲一句。
-        建议直接把批大小从 12 改成 <b>10</b>：这样「详细」= 每 1 批，「简洁」= 每 2 批，文案上的数字就是代码里的数字，不用「大约」去圆。
-        如果批大小不动，12 说成「大约每 10 个弯」也能接受（实际比承诺的略少，是安全方向），但两档的实现会变成 12 / 24。
+        <b>三行都是第一人称的「我想要什么」</b>，不是系统的「我会做什么」。用户不需要理解阈值，
+        对着自己今天的状态挑一句就行——这也是三个选项里唯一不会写出我们做不到的承诺的写法。
+        上一节的列表里有开关，可以和具象版直接切着比。
       </p>
     </div>
   </div>
@@ -580,6 +581,18 @@ document.getElementById('chips').innerHTML = [
   [volGlyph(1,false,17),'简洁 Brief'],
   [volGlyph(0,true,17), '静音 Silent']
 ].map(([g,n])=>`<span class="chip">${g}${n}<span class="cv">⌄</span></span>`).join('');
+
+const COPYSET = {
+  intent: ['想被多提醒，边滑边改','只想听重点，不打断节奏','只想安静滑，练完再看'],
+  number: ['大约每 10 个弯讲一句','大约每 20 个弯讲一句','滑行中不讲，练完再看']
+};
+document.querySelectorAll('[data-copy]').forEach(b=>{
+  b.onclick = () => {
+    const set = COPYSET[b.dataset.copy];
+    document.querySelectorAll('[data-copy]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+    ['d1','d2','d3'].forEach((id,i)=>{ document.getElementById(id).textContent = set[i]; });
+  };
+});
 
 /* ---------- feed ---------- */
 const clock = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" style="opacity:.6"><circle cx="12" cy="12" r="9" stroke="#90A1B9" stroke-width="2.6"/><path d="M12 7v5l3 2" stroke="#90A1B9" stroke-width="2.6" stroke-linecap="round"/></svg>`;
