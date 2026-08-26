@@ -309,9 +309,9 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
       <p>沿用 iOS 音量图标的通用语义：说得多 = 两道声弧，说得少 = 一道，静音 = 划掉并转灰。灰色在这里第一次有了意义——它<b>真的</b>是关掉的。</p>
       <div class="ctrls" style="margin:14px 0 0"><button data-copy="intent" aria-pressed="true">B 意图版（建议）</button><button data-copy="number" aria-pressed="false">A 具象版（带数字）</button></div>
       <div style="margin-top:12px;background:var(--slate);border-radius:14px;padding:6px">
-        <div class="mrow sel"><span class="mi" id="new1"></span><div><b>详细　Detailed</b><i id="d1">想被多提醒，边滑边改</i></div><span class="ck">✓</span></div>
-        <div class="mrow"><span class="mi" id="new2"></span><div><b>简洁　Brief</b><i id="d2">只想听重点，不打断节奏</i></div></div>
-        <div class="mrow"><span class="mi" id="new3"></span><div><b>静音　Silent</b><i id="d3">只想安静滑，练完再看</i></div></div>
+        <div class="mrow sel"><span class="mi" id="new1"></span><div><b>详细　Detailed</b><i id="d1">专心练技术时用，提醒最多</i></div><span class="ck">✓</span></div>
+        <div class="mrow"><span class="mi" id="new2"></span><div><b>简洁　Brief</b><i id="d2">想放松滑，只在要紧处提醒</i></div></div>
+        <div class="mrow"><span class="mi" id="new3"></span><div><b>静音　Silent</b><i id="d3">滑行中不提醒，练完再看</i></div></div>
       </div>
       <p style="margin-top:16px"><b>顶部指示器同一套符号，20px 实际尺寸：</b></p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px" id="chips"></div>
@@ -358,26 +358,26 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
         <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left">
           <th style="padding:6px 8px">模式</th><th style="padding:6px 8px">中文描述</th></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">详细</td>
-            <td style="padding:8px;color:var(--g1)">想被多提醒，边滑边改</td></tr>
+            <td style="padding:8px;color:var(--g1)">专心练技术时用，提醒最多</td></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">简洁</td>
-            <td style="padding:8px;color:var(--g1)">只想听重点，不打断节奏</td></tr>
+            <td style="padding:8px;color:var(--g1)">想放松滑，只在要紧处提醒</td></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">静音</td>
-            <td style="padding:8px;color:var(--g1)">只想安静滑，练完再看</td></tr>
+            <td style="padding:8px;color:var(--g1)">滑行中不提醒，练完再看</td></tr>
       </table>
       <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:14px;border-top:1px solid var(--g200)">
         <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left">
           <th style="padding:8px 8px 6px">EN</th><th style="padding:8px 8px 6px">English copy</th></tr>
         <tr><td style="padding:7px 8px;font-weight:850">Detailed</td>
-            <td style="padding:7px 8px;color:var(--g1)">Coach me the whole way down</td></tr>
+            <td style="padding:7px 8px;color:var(--g1)">For technique days. The most feedback.</td></tr>
         <tr><td style="padding:7px 8px;font-weight:850">Brief</td>
-            <td style="padding:7px 8px;color:var(--g1)">Just the key moments</td></tr>
+            <td style="padding:7px 8px;color:var(--g1)">For cruising. Only when it matters.</td></tr>
         <tr><td style="padding:7px 8px;font-weight:850">Silent</td>
-            <td style="padding:7px 8px;color:var(--g1)">Ride quiet, review after</td></tr>
+            <td style="padding:7px 8px;color:var(--g1)">Nothing while you ride. Review after.</td></tr>
       </table>
       <p class="quote" style="margin-top:16px">
         <b>三行都是第一人称的「我想要什么」</b>，不是系统的「我会做什么」。用户不需要理解阈值，
         对着自己今天的状态挑一句就行——这也是三个选项里唯一不会写出我们做不到的承诺的写法。
-        上一节的列表里有开关，可以和具象版直接切着比。
+        竞品调研（下一节）验证了这个方向：五个产品没一个在选项下面写频率数字。
       </p>
     </div>
   </div>
@@ -397,9 +397,120 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
   </div>
 </section>
 
-<!-- 5 · 真实界面对比 -->
+<!-- 5 · 竞品调研 -->
 <section class="wrap">
-  <h2>5 · 放回真实 feed 里比</h2>
+  <h2>5 · 竞品怎么写：5 个产品的原文</h2>
+  <p class="sec-sub">
+    找了 5 个有「说多 / 说少 / 不说」三档的产品，抄的是它们设置页和帮助文档里的<b>原文</b>，不是我的复述。
+    结论先说：<b>五个全都写了描述，包括「静音」那一档；五个全都没在选项下面写频率数字。</b>
+  </p>
+
+  <div class="card" style="padding:0;overflow:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:14.5px;min-width:860px">
+      <tr style="background:var(--slate);color:var(--g2);font-size:12.5px;font-weight:800;text-align:left">
+        <th style="padding:12px 16px">产品</th><th style="padding:12px 16px">选项标签</th>
+        <th style="padding:12px 16px">描述原文</th><th style="padding:12px 16px">写法</th></tr>
+
+      <tr style="border-top:1px solid var(--g200)">
+        <td style="padding:12px 16px;font-weight:850" rowspan="3">Waze<br><span style="font-size:12px;color:var(--g300);font-weight:600">导航语音</span></td>
+        <td style="padding:10px 16px;font-weight:750">On</td>
+        <td style="padding:10px 16px;color:var(--g1)">Get navigation guidance and alerts</td>
+        <td style="padding:10px 16px;color:var(--g2);font-size:13px" rowspan="3">同义重述<br>平均 4–6 个词</td></tr>
+      <tr><td style="padding:10px 16px;font-weight:750">Alerts only</td>
+        <td style="padding:10px 16px;color:var(--g1)">Get alerts only</td></tr>
+      <tr><td style="padding:10px 16px;font-weight:750">Off</td>
+        <td style="padding:10px 16px;color:var(--g1)">No sounds at all　<span class="pill p-mint" style="font-size:10px">静音也写了</span></td></tr>
+
+      <tr style="border-top:1px solid var(--g200)">
+        <td style="padding:12px 16px;font-weight:850" rowspan="3">高德地图<br><span style="font-size:12px;color:var(--g300);font-weight:600">播报模式</span></td>
+        <td style="padding:10px 16px;font-weight:750">详细播报</td>
+        <td style="padding:10px 16px;color:var(--g1)">行驶方向、前方路况、电子眼位置、拥堵长度与通过时间都播</td>
+        <td style="padding:10px 16px;color:var(--g2);font-size:13px" rowspan="3">场景 + 事件<br><b>和我们同名</b></td></tr>
+      <tr><td style="padding:10px 16px;font-weight:750">简洁播报</td>
+        <td style="padding:10px 16px;color:var(--g1)">适合熟悉路段或高速路等路况简单的路段</td></tr>
+      <tr><td style="padding:10px 16px;font-weight:750">极简播报</td>
+        <td style="padding:10px 16px;color:var(--g1)">仅在瞬时超速、路况变化等必要场景下提醒</td></tr>
+
+      <tr style="border-top:1px solid var(--g200)">
+        <td style="padding:12px 16px;font-weight:850" rowspan="2">百度地图<br><span style="font-size:12px;color:var(--g300);font-weight:600">播报模式</span></td>
+        <td style="padding:10px 16px;font-weight:750">标准 / 简洁 / 仅提示音 / 静音</td>
+        <td style="padding:10px 16px;color:var(--g1)">标准转向从 1km 起提示，共 500/200/150/50m 五次；简洁只提示 200m、50m 两次</td>
+        <td style="padding:10px 16px;color:var(--g2);font-size:13px" rowspan="2"><b>数字只在帮助文档里</b><br>选项下面没有</td></tr>
+      <tr><td style="padding:10px 16px;font-weight:750">（选项页）</td>
+        <td style="padding:10px 16px;color:var(--g1)">只有标签，无频率数字</td></tr>
+
+      <tr style="border-top:1px solid var(--g200)">
+        <td style="padding:12px 16px;font-weight:850" rowspan="3">Carv<br><span style="font-size:12px;color:var(--g300);font-weight:600">滑雪 AI 教练 · 直接竞品</span></td>
+        <td style="padding:10px 16px;font-weight:750">Turn-By-Turn Feedback</td>
+        <td style="padding:10px 16px;color:var(--g1)">Hear sounds on every turn and pass targets to progress</td>
+        <td style="padding:10px 16px;color:var(--g2);font-size:13px" rowspan="3">按<b>时机</b>分档<br>不是按音量</td></tr>
+      <tr><td style="padding:10px 16px;font-weight:750">Chairlift Tips</td>
+        <td style="padding:10px 16px;color:var(--g1)">Carv detects when you're on a chairlift, providing audio tips that respond to your skiing</td></tr>
+      <tr><td style="padding:10px 16px;font-weight:750">Just Data</td>
+        <td style="padding:10px 16px;color:var(--g1)">Switch off audio coaching to focus on the mountain while Carv captures data for later review</td></tr>
+
+      <tr style="border-top:1px solid var(--g200)">
+        <td style="padding:12px 16px;font-weight:850" rowspan="3">Slack<br><span style="font-size:12px;color:var(--g300);font-weight:600">通知级别</span></td>
+        <td style="padding:10px 16px;font-weight:750">All new messages</td>
+        <td style="padding:10px 16px;color:var(--g1)">You'll be notified of all new messages</td>
+        <td style="padding:10px 16px;color:var(--g2);font-size:13px" rowspan="3">列出触发事件</td></tr>
+      <tr><td style="padding:10px 16px;font-weight:750">Direct messages, mentions &amp; keywords</td>
+        <td style="padding:10px 16px;color:var(--g1)">当有人 @ 你、发私信、或用到你的关键词时通知你</td></tr>
+      <tr><td style="padding:10px 16px;font-weight:750">Nothing</td>
+        <td style="padding:10px 16px;color:var(--g1)">完全关闭通知</td></tr>
+    </table>
+  </div>
+
+  <div class="grid3" style="margin-top:20px">
+    <div class="card"><span class="pill p-mint">回答第一个问题</span>
+      <h3>要加，静音那行也要加</h3>
+      <p>五个产品全部给每一档都配了描述。<b>Waze 连「Sound off」都写了一句「No sounds at all」</b>——一句近乎废话的同义重述，就是为了三行齐。</p>
+      <p>所以「静音不用解释、写了显得多余」这个顾虑，行业里没人这么做。加，而且不用怕它像废话。</p></div>
+    <div class="card"><span class="pill p-red">回答第二个问题</span>
+      <h3>没有一个产品写频率数字</h3>
+      <p>百度地图内部有极精确的口径（标准 5 次、简洁 2 次），但那串数字<b>只出现在帮助文档和评测里，选项页一个数字都没有</b>。</p>
+      <p>这正好印证 Leon 的判断，也印证「数字给算法、感受给用户」这个分层。我们不是特例，是行业惯例。</p></div>
+    <div class="card"><span class="pill p-blue">值得注意</span>
+      <h3>高德的命名和我们撞了</h3>
+      <p>高德就叫<b>详细播报 / 简洁播报 / 静音</b>。中文用户在导航里已经学过这套词，认知成本是零——Edward 提的这组命名比我们想的更稳。</p>
+      <p>而且高德的「简洁」描述写的是<b>场景</b>（「适合熟悉路段或高速路」），不是频率。可以直接借这个思路。</p></div>
+  </div>
+
+  <div class="grid2" style="margin-top:18px;align-items:start">
+    <div class="card">
+      <span class="pill p-grey">三种写法都有人用</span>
+      <h3>选哪种取决于标签够不够自解释</h3>
+      <p><b>A 同义重述（Waze）</b>：极短，几乎重复标签。前提是标签本身自解释——「Alerts only」不用再解释。</p>
+      <p><b>B 场景型（高德、Carv）</b>：告诉你什么时候选它。适合标签抽象、但使用场景清晰的情况。</p>
+      <p><b>C 事件型（Slack、高德极简）</b>：列出会触发的事件。最精确，但<b>等于做承诺</b>——列了就得做到。</p>
+      <p class="quote">我们不能用 C：短趟攒不满一批就切趟，列了事件却不播，用户会当 bug。A 也不够——「简洁」在滑雪教练语境里不像「Alerts only」那样自解释。<b>所以走 B。</b></p>
+    </div>
+    <div class="card" style="outline:2.5px solid var(--mint);outline-offset:-2.5px">
+      <span class="pill p-mint">调研后的最终文案</span>
+      <h3>场景 + 定性的量，不给数字</h3>
+      <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:14.5px">
+        <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left"><th style="padding:6px 8px">模式</th><th style="padding:6px 8px">中文</th></tr>
+        <tr><td style="padding:8px;font-weight:850">详细</td><td style="padding:8px;color:var(--g1)">专心练技术时用，提醒最多</td></tr>
+        <tr><td style="padding:8px;font-weight:850">简洁</td><td style="padding:8px;color:var(--g1)">想放松滑，只在要紧处提醒</td></tr>
+        <tr><td style="padding:8px;font-weight:850">静音</td><td style="padding:8px;color:var(--g1)">滑行中不提醒，练完再看</td></tr>
+      </table>
+      <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:14px;border-top:1px solid var(--g200)">
+        <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left"><th style="padding:8px 8px 6px">EN</th><th style="padding:8px 8px 6px">English copy</th></tr>
+        <tr><td style="padding:7px 8px;font-weight:850">Detailed</td><td style="padding:7px 8px;color:var(--g1)">For technique days. The most feedback.</td></tr>
+        <tr><td style="padding:7px 8px;font-weight:850">Brief</td><td style="padding:7px 8px;color:var(--g1)">For cruising. Only when it matters.</td></tr>
+        <tr><td style="padding:7px 8px;font-weight:850">Silent</td><td style="padding:7px 8px;color:var(--g1)">Nothing while you ride. Review after.</td></tr>
+      </table>
+      <p class="quote" style="margin-top:14px">
+        每行「<b>什么时候用它，会听到多少</b>」两段，12–13 字，和高德一个路子。
+        「提醒最多 / 只在要紧处 / 不提醒」是<b>相对量</b>，三档互相比较就能懂，不需要外部标准，也不构成我们做不到的承诺。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · 真实界面对比 -->
+<section class="wrap">
+  <h2>6 · 放回真实 feed 里比</h2>
   <p class="sec-sub">
     同一段真实内容：session 卡 → 用户提问 → Chatbot 文字回答 → 语音实时反馈卡 → Peak Moment → Run1 Report。三列分别是现状、本期建议、以后的完全体。
   </p>
@@ -421,7 +532,7 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
 
 <!-- 4 · 角色 -->
 <section class="wrap">
-  <h2>6 · 如果要做角色，它长这样：Ullr</h2>
+  <h2>7 · 如果要做角色，它长这样：Ullr</h2>
   <p class="sec-sub">Ullr 是北欧神话里的滑雪之神，也是我们仓库里已经在用的名字。品牌薄荷 <code>#28F5D2</code> + 柠檬 <code>#B1FE2B</code>，不用人脸、不用写实，避免和用户自己的头像混淆。点按钮看状态。</p>
   <div class="ctrls" id="state-ctrls">
     <button data-state="idle" aria-pressed="true">待机</button>
@@ -454,7 +565,7 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
 
 <!-- 5 · 落地 -->
 <section class="wrap">
-  <h2>7 · 落地：本期 6 件事，以后 1 件事</h2>
+  <h2>8 · 落地：本期 6 件事，以后 1 件事</h2>
   <p class="sec-sub">关键是把三个槽位在组件层分开：<code>cardType</code> 管卡片类型，<code>coachMode</code> 管教练音量，<code>speaker</code> 管说话人。分开之后，加不加头像就再也不用重开这个会。</p>
   <div class="grid2">
     <pre class="code"><span class="c">// 三个槽位，语义完全不同，谁也别借谁的图标</span>
@@ -583,7 +694,7 @@ document.getElementById('chips').innerHTML = [
 ].map(([g,n])=>`<span class="chip">${g}${n}<span class="cv">⌄</span></span>`).join('');
 
 const COPYSET = {
-  intent: ['想被多提醒，边滑边改','只想听重点，不打断节奏','只想安静滑，练完再看'],
+  intent: ['专心练技术时用，提醒最多','想放松滑，只在要紧处提醒','滑行中不提醒，练完再看'],
   number: ['大约每 10 个弯讲一句','大约每 20 个弯讲一句','滑行中不讲，练完再看']
 };
 document.querySelectorAll('[data-copy]').forEach(b=>{
