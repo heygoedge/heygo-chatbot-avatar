@@ -308,9 +308,9 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
       <h3>形状 + 颜色双重区分，不靠数数</h3>
       <p>沿用 iOS 音量图标的通用语义：说得多 = 两道声弧，说得少 = 一道，静音 = 划掉并转灰。灰色在这里第一次有了意义——它<b>真的</b>是关掉的。</p>
       <div style="margin-top:16px;background:var(--slate);border-radius:14px;padding:6px">
-        <div class="mrow sel"><span class="mi" id="new1"></span><div><b>详细　Detailed</b><i>一趟最多说 4 次，每次给一个动作</i></div><span class="ck">✓</span></div>
-        <div class="mrow"><span class="mi" id="new2"></span><div><b>简洁　Brief</b><i>一趟最多说 1 次，只挑最要紧的</i></div></div>
-        <div class="mrow"><span class="mi" id="new3"></span><div><b>静音　Silent</b><i>一趟一次都不说，练完再看</i></div></div>
+        <div class="mrow sel"><span class="mi" id="new1"></span><div><b>详细　Detailed</b><i>大约每 12 个弯说一句</i></div><span class="ck">✓</span></div>
+        <div class="mrow"><span class="mi" id="new2"></span><div><b>简洁　Brief</b><i>大约每 36 个弯说一句</i></div></div>
+        <div class="mrow"><span class="mi" id="new3"></span><div><b>静音　Silent</b><i>全程不说，练完再看</i></div></div>
       </div>
       <p style="margin-top:16px"><b>顶部指示器同一套符号，20px 实际尺寸：</b></p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px" id="chips"></div>
@@ -335,57 +335,57 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
 <section class="wrap">
   <h2>4 · 三个模式的名字和描述文案</h2>
   <p class="sec-sub">
-    Edward 的第二轮反馈是对的：写「每个问题都说 / 只说关键问题」，用户读完只会更疑惑——<b>什么是关键问题？我滑一趟到底会听到多少？</b>
-    所以描述不能讲「说什么」，要讲<b>「一趟能听到几次」</b>。下面的数字是从
-    <code>nudge_day_state.dart</code> 的实际配额表来的，不是拍的。
+    Edward 追问「一趟怎么定义」，把我上一版的「一趟最多 4 次」问穿了——<b>那个写法是错的，已改</b>。
+    单位不能用「趟」：室内一趟 3 分钟、室外一趟 30 分钟，同一个数字是两种完全不同的体验。
+    代码里真正在起作用的节流本来就<b>不是按趟，是按弯</b>，所以文案也该按弯写。
   </p>
 
   <div class="grid2" style="align-items:start">
     <div class="card">
-      <span class="pill p-blue">代码里查到的事实</span>
-      <h3>现在一趟最多说 4 次</h3>
-      <p>端侧每滑 <b>12 个弯</b>结算一批，<b>每批最多出声 1 次</b>。一趟的上限是：问题提醒 ≤2、进步 ≤1、没进步 ≤1，<b>合计最多 4 次</b>。同一个毛病一天最多说 3 次。</p>
-      <p>每次就<b>一句话、一个动作</b>，1.2–2 秒。已录好的原话长这样：「前脚膝盖先弯曲折叠」「脚踝别松，锁住」。所以「详细」根本不是话痨，用户完全可以接受。</p>
-      <p>另外不满 12 个弯的余弯会丢掉，所以<b>短趟可能一句都没有</b>——文案必须写「最多」，不能写「每趟都会」。</p>
-      <p class="quote">出处：<code>coach_nudge/domain/nudge_day_state.dart</code> 的配额表 + <code>doc-sp-on-device-coach-nudge-copy.md</code>。三档模式目前<b>还没实现</b>，只有一份待评审 PRD，所以 4 / 1 / 0 这三个数是可以现在定的。</p>
+      <span class="pill p-red">我上一版写错了</span>
+      <h3>「4 次」是我算的，不是产品定的</h3>
+      <p>4 = 问题提醒 ≤2 + 进步 ≤1 + 没进步 ≤1。但后两条有前置条件——<b>「没进步」要求同一个毛病当天已经提醒过 3 次</b>才可能触发。所以正常一趟基本就是 <b>≤2 次</b>，4 是几乎碰不到的理论天花板。写进文案会骗用户。</p>
+      <p><b>「一趟」的定义是气压计说了算：</b>从开始下滑，到检测到你在爬升（上缆车 / 魔毯）为止。不是时间，不是距离——<code>AlgorithmRunBoundaryEvent</code> 注释写的是「feed_baro 在缆车上当场判定」。</p>
+      <p>所以 Edward 的质疑成立：室内一趟可能 15 个弯，室外一趟可能 100 多个弯，「每趟 ≤2」在两边是<b>五倍以上的密度差</b>。这不只是文案问题，是这条频控规则本身的问题。</p>
+      <p class="quote">出处：<code>coach_nudge/domain/nudge_day_state.dart</code>（配额表）、<code>skiing_session_controller_algorithm.dart:281</code>（趟边界）、<code>doc-sp-on-device-coach-nudge-v2.md</code>（延迟与丢弃）。</p>
     </div>
 
     <div class="card" style="outline:2.5px solid var(--mint);outline-offset:-2.5px">
       <span class="pill p-mint">建议文案</span>
-      <h3>三行都回答「一趟听到几次」</h3>
+      <h3>改用「弯」做单位，室内室外一致</h3>
       <table style="width:100%;border-collapse:collapse;margin-top:12px;font-size:14.5px">
         <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left">
           <th style="padding:6px 8px">模式</th><th style="padding:6px 8px">中文描述</th></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">详细</td>
-            <td style="padding:8px;color:var(--g1)">一趟最多说 4 次，每次给一个动作</td></tr>
+            <td style="padding:8px;color:var(--g1)">大约每 12 个弯说一句</td></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">简洁</td>
-            <td style="padding:8px;color:var(--g1)">一趟最多说 1 次，只挑最要紧的</td></tr>
+            <td style="padding:8px;color:var(--g1)">大约每 36 个弯说一句</td></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">静音</td>
-            <td style="padding:8px;color:var(--g1)">一趟一次都不说，练完再看</td></tr>
+            <td style="padding:8px;color:var(--g1)">全程不说，练完再看</td></tr>
       </table>
       <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:14px;border-top:1px solid var(--g200)">
         <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left">
           <th style="padding:8px 8px 6px">EN</th><th style="padding:8px 8px 6px">English copy</th></tr>
         <tr><td style="padding:7px 8px;font-weight:850">Detailed</td>
-            <td style="padding:7px 8px;color:var(--g1)">Up to 4 tips a run, one move each</td></tr>
+            <td style="padding:7px 8px;color:var(--g1)">About one tip every 12 turns</td></tr>
         <tr><td style="padding:7px 8px;font-weight:850">Brief</td>
-            <td style="padding:7px 8px;color:var(--g1)">One tip a run, the one that matters most</td></tr>
+            <td style="padding:7px 8px;color:var(--g1)">About one tip every 36 turns</td></tr>
         <tr><td style="padding:7px 8px;font-weight:850">Silent</td>
-            <td style="padding:7px 8px;color:var(--g1)">Nothing during the run — review it after</td></tr>
+            <td style="padding:7px 8px;color:var(--g1)">Nothing while you ride — review it after</td></tr>
       </table>
       <p class="quote" style="margin-top:16px">
-        <b>4 / 1 / 0 是同一根轴上的三个刻度</b>，用户扫一眼就知道差别有多大，不用理解「关键」是什么意思。
-        「详细」那档就是<b>现在已有的行为</b>，所以只要实现「简洁」（砍到 1 次）和「静音」（砍到 0 次）两档。
-        静音那行顺带回答了「静音了还记不记录」——所以它不是为了凑格式，UI 也齐了。
+        <b>12 / 36 / 0 都是弯数，室内室外是同一个密度。</b>「详细」正好等于现在端侧已有的行为（每批 12 弯 ≤1 句），
+        「简洁」就是每 3 批说一句，实现上是改一个模数。「弯」在这个产品里本来就是首屏指标（TURNS），用户认得。
+        按一个弯约 3 秒算，12 个弯≈滑 36 秒——用户对这个节奏是有体感的。
       </p>
     </div>
   </div>
 
   <div class="grid3" style="margin-top:18px">
-    <div class="card"><span class="pill p-blue">写法规则</span>
-      <h3>只写数量，不写「问题」</h3>
-      <p>用户选模式时想知道的是「会不会烦我」，不是「它分析什么」。所以三行都是「<b>一趟说几次，每次是什么</b>」，同结构、12–14 字。</p>
-      <p>「关键问题」「深度跟踪」这类词全部不要——用户没有判断标准，读完只会更疑惑。</p></div>
+    <div class="card"><span class="pill p-red">要算法同学确认</span>
+      <h3>室内可能整场一句都没有</h3>
+      <p>三条规则叠在一起对室内很不友好：<b>不满 12 个弯的余弯直接丢</b>（文档写实测约 25% 的弯落在段尾被丢）、<b>弯间隙 &gt;15 秒就断链重攒</b>、趟边界靠气压计爬升判定。</p>
+      <p>室内一趟弯少、上魔毯快、爬升幅度小，很可能<b>攒不满一批就切趟</b>，结果一句都不播。这个得拿室内真机数据验一下，不是文案能解决的。</p></div>
     <div class="card"><span class="pill p-red">待产品拍板</span>
       <h3>静音时摔倒关怀还出不出声？</h3>
       <p>现在有两条 P0 语音：<b>摔倒关怀</b>和<b>低电量提醒</b>。待评审 PRD 写的「勿扰 = 零语音」会把这两条也关掉。</p>
