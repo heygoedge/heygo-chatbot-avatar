@@ -309,9 +309,9 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
       <p>沿用 iOS 音量图标的通用语义：说得多 = 两道声弧，说得少 = 一道，静音 = 划掉并转灰。灰色在这里第一次有了意义——它<b>真的</b>是关掉的。</p>
       <div class="ctrls" style="margin:14px 0 0"><button data-copy="intent" aria-pressed="true">B 意图版（建议）</button><button data-copy="number" aria-pressed="false">A 具象版（带数字）</button></div>
       <div style="margin-top:12px;background:var(--slate);border-radius:14px;padding:6px">
-        <div class="mrow sel"><span class="mi" id="new1"></span><div><b>详细　Detailed</b><i id="d1">专心练技术时用，提醒最多</i></div><span class="ck">✓</span></div>
-        <div class="mrow"><span class="mi" id="new2"></span><div><b>简洁　Brief</b><i id="d2">想放松滑，只在要紧处提醒</i></div></div>
-        <div class="mrow"><span class="mi" id="new3"></span><div><b>静音　Silent</b><i id="d3">滑行中不提醒，练完再看</i></div></div>
+        <div class="mrow sel"><span class="mi" id="new1"></span><div><b>详细　Detailed</b><i id="d1">认真练，提醒最多</i></div><span class="ck">✓</span></div>
+        <div class="mrow"><span class="mi" id="new2"></span><div><b>简洁　Brief</b><i id="d2">放松滑，只提要紧的</i></div></div>
+        <div class="mrow"><span class="mi" id="new3"></span><div><b>静音　Silent</b><i id="d3">安静滑，练完再看</i></div></div>
       </div>
       <p style="margin-top:16px"><b>顶部指示器同一套符号，20px 实际尺寸：</b></p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px" id="chips"></div>
@@ -358,11 +358,11 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
         <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left">
           <th style="padding:6px 8px">模式</th><th style="padding:6px 8px">中文描述</th></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">详细</td>
-            <td style="padding:8px;color:var(--g1)">专心练技术时用，提醒最多</td></tr>
+            <td style="padding:8px;color:var(--g1)">认真练，提醒最多</td></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">简洁</td>
-            <td style="padding:8px;color:var(--g1)">想放松滑，只在要紧处提醒</td></tr>
+            <td style="padding:8px;color:var(--g1)">放松滑，只提要紧的</td></tr>
         <tr><td style="padding:8px;font-weight:850;white-space:nowrap">静音</td>
-            <td style="padding:8px;color:var(--g1)">滑行中不提醒，练完再看</td></tr>
+            <td style="padding:8px;color:var(--g1)">安静滑，练完再看</td></tr>
       </table>
       <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:14px;border-top:1px solid var(--g200)">
         <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left">
@@ -490,9 +490,9 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
       <h3>场景 + 定性的量，不给数字</h3>
       <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:14.5px">
         <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left"><th style="padding:6px 8px">模式</th><th style="padding:6px 8px">中文</th></tr>
-        <tr><td style="padding:8px;font-weight:850">详细</td><td style="padding:8px;color:var(--g1)">专心练技术时用，提醒最多</td></tr>
-        <tr><td style="padding:8px;font-weight:850">简洁</td><td style="padding:8px;color:var(--g1)">想放松滑，只在要紧处提醒</td></tr>
-        <tr><td style="padding:8px;font-weight:850">静音</td><td style="padding:8px;color:var(--g1)">滑行中不提醒，练完再看</td></tr>
+        <tr><td style="padding:8px;font-weight:850">详细</td><td style="padding:8px;color:var(--g1)">认真练，提醒最多</td></tr>
+        <tr><td style="padding:8px;font-weight:850">简洁</td><td style="padding:8px;color:var(--g1)">放松滑，只提要紧的</td></tr>
+        <tr><td style="padding:8px;font-weight:850">静音</td><td style="padding:8px;color:var(--g1)">安静滑，练完再看</td></tr>
       </table>
       <table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:14px;border-top:1px solid var(--g200)">
         <tr style="color:var(--g2);font-size:12px;font-weight:800;text-align:left"><th style="padding:8px 8px 6px">EN</th><th style="padding:8px 8px 6px">English copy</th></tr>
@@ -501,8 +501,9 @@ footer{padding:50px 0 70px;color:var(--g2);font-size:14px;line-height:1.7}
         <tr><td style="padding:7px 8px;font-weight:850">Silent</td><td style="padding:7px 8px;color:var(--g1)">Nothing while you ride. Review after.</td></tr>
       </table>
       <p class="quote" style="margin-top:14px">
-        每行「<b>什么时候用它，会听到多少</b>」两段，12–13 字，和高德一个路子。
-        「提醒最多 / 只在要紧处 / 不提醒」是<b>相对量</b>，三档互相比较就能懂，不需要外部标准，也不构成我们做不到的承诺。
+        Edward 那版的结构更好，已采纳：<b>前半段压成三字场景，三行竖着对齐</b>（认真练 / 放松滑 / 安静滑），
+        后半段统一成「提醒」这一个词。第一档动词是「练」、后两档是「滑」——这个对比本身就说清了差别。
+        「提醒最多 / 只提要紧的」是<b>相对量</b>，三档互相比就能懂，不需要外部标准，也不构成我们做不到的承诺。
       </p>
     </div>
   </div>
@@ -694,7 +695,7 @@ document.getElementById('chips').innerHTML = [
 ].map(([g,n])=>`<span class="chip">${g}${n}<span class="cv">⌄</span></span>`).join('');
 
 const COPYSET = {
-  intent: ['专心练技术时用，提醒最多','想放松滑，只在要紧处提醒','滑行中不提醒，练完再看'],
+  intent: ['认真练，提醒最多','放松滑，只提要紧的','安静滑，练完再看'],
   number: ['大约每 10 个弯讲一句','大约每 20 个弯讲一句','滑行中不讲，练完再看']
 };
 document.querySelectorAll('[data-copy]').forEach(b=>{
